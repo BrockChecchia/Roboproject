@@ -1,0 +1,21 @@
+##This works for Colab
+
+import numpy as np
+from matplotlib import pyplot as plt
+import cv2
+from google.colab.patches import cv2_imshow
+
+
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+## This needs to be your perosonal drive
+img = cv2.imread("/content/drive/My Drive/Colab Notebooks/lena.png")
+
+imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+faces = face_cascade.detectMultiScale(imgGray,1.1,4)
+
+for (x,y,w,h) in faces:
+    cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+    
+cv2_imshow(img)
